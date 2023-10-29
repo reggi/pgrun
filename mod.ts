@@ -269,8 +269,6 @@ async function organizer (sqlPaths: string[], opts: SQLOptions & OrganizerOption
   const target = opts?.target
   const targets = files.filter(file => matchTargetNode(file, opts.action, target))
   
-  console.log({targets})
-
   const groupedTargets = groupByHandler(targets, file => file.ctx.identifier)
   const beforeEach = getShakenIfExists(files, GLOBAL_BEFORE_EACH_TEST)
   const afterEach = getShakenIfExists(files, GLOBAL_AFTER_EACH_TEST)
@@ -448,7 +446,6 @@ export async function main (options: Options) {
   const rd = removeDuplicatesByHandler(flatFiles, (file) => file.ctx.base, (file) => Boolean(file.ctx.lifecycle))
 
   if (action === BUNDLE_ACTION) {
-    console.log(rd)
     const bundleOutput = rd
       .map(file => file.content).join('\n\n')
     console.log(bundleOutput)
